@@ -187,42 +187,73 @@
   }
 
   function updateAverageScoreColor(score) {
-    if (score < 40) circle.style.backgroundColor = '#ff6666';
-    else if (score < 70) circle.style.backgroundColor = '#ffcc66';
-    else circle.style.backgroundColor = '#66cc66';
+    if (score < 40) {
+      circle.style.backgroundColor = '#ff6666';
+    } else if (score < 70) {
+      circle.style.backgroundColor = '#ffcc66';
+    } else {
+      circle.style.backgroundColor = '#66cc66';
+    }
   }
 
-  function updateDisplay(avg) {
-    circle.textContent = avg.toFixed(1);
-    updateAveragePointer(avg);
-    updateAverageScoreColor(avg);
+  function updateDisplay(average) {
+    circle.textContent = average.toFixed(1);
+    updateAveragePointer(average);
+    updateAverageScoreColor(average);
   }
 
-  function handleNewScore(newScore) {
-    let data = JSON.parse(localStorage.getItem(gameKey)) || { total: 0, count: 0 };
-    data.total += newScore;
+  function handleNewScore(score) {
+    // Parse previous data or set defaults
+    let stored = localStorage.getItem(gameKey);
+    let data = { total: 0, count: 0 };
+
+    try {
+      if (stored) {
+        const parsed = JSON.parse(stored);
+        if (typeof parsed.total === "number" && typeof parsed.count === "number") {
+          data = parsed;
+        }
+      }
+    } catch (e) {
+      // fallback to fresh start
+      console.warn("Corrupted localStorage, resetting score data.");
+    }
+
+    data.total += score;
     data.count += 1;
     const average = data.total / data.count;
 
+    // Save back to localStorage
     localStorage.setItem(gameKey, JSON.stringify(data));
+
+    // Update UI
     updateDisplay(average);
   }
 
+  // Setup event listeners for bars
   document.querySelectorAll('.bar').forEach(bar => {
     bar.addEventListener('mouseover', function () {
       circle.textContent = this.dataset.value;
     });
+
     bar.addEventListener('click', function () {
-      handleNewScore(parseInt(this.dataset.value));
+      const value = parseInt(this.dataset.value);
+      if (!isNaN(value)) {
+        handleNewScore(value);
+      }
     });
   });
 
-  // Load and show average on page load
+  // Load from localStorage on page load
   window.addEventListener("DOMContentLoaded", () => {
-    const saved = JSON.parse(localStorage.getItem(gameKey));
-    if (saved && saved.count > 0) {
-      const avg = saved.total / saved.count;
-      updateDisplay(avg);
+    try {
+      const stored = JSON.parse(localStorage.getItem(gameKey));
+      if (stored && typeof stored.total === "number" && typeof stored.count === "number" && stored.count > 0) {
+        const average = stored.total / stored.count;
+        updateDisplay(average);
+      }
+    } catch (e) {
+      console.warn("No valid stored rating found.");
     }
   });
 </script>
