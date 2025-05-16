@@ -177,7 +177,7 @@
     <div id="reviewsDisplay"></div>
 </div>
 
-    <script>
+<script>
   const gameKey = "gamiflix_rating_cyberpunk";
   const pointer = document.getElementById('average-pointer');
   const circle = document.getElementById('my-score-circle');
@@ -192,11 +192,20 @@
     else circle.style.backgroundColor = '#66cc66';
   }
 
-  function setScore(score) {
-    localStorage.setItem(gameKey, score);
-    circle.textContent = score.toFixed(1);
-    updateAveragePointer(score);
-    updateAverageScoreColor(score);
+  function updateDisplay(avg) {
+    circle.textContent = avg.toFixed(1);
+    updateAveragePointer(avg);
+    updateAverageScoreColor(avg);
+  }
+
+  function handleNewScore(newScore) {
+    let data = JSON.parse(localStorage.getItem(gameKey)) || { total: 0, count: 0 };
+    data.total += newScore;
+    data.count += 1;
+    const average = data.total / data.count;
+
+    localStorage.setItem(gameKey, JSON.stringify(data));
+    updateDisplay(average);
   }
 
   document.querySelectorAll('.bar').forEach(bar => {
@@ -204,15 +213,20 @@
       circle.textContent = this.dataset.value;
     });
     bar.addEventListener('click', function () {
-      setScore(parseInt(this.dataset.value));
+      handleNewScore(parseInt(this.dataset.value));
     });
   });
 
+  // Load and show average on page load
   window.addEventListener("DOMContentLoaded", () => {
-    const saved = localStorage.getItem(gameKey);
-    if (saved) setScore(parseInt(saved));
+    const saved = JSON.parse(localStorage.getItem(gameKey));
+    if (saved && saved.count > 0) {
+      const avg = saved.total / saved.count;
+      updateDisplay(avg);
+    }
   });
 </script>
+
 
 <!-- Firebase -->
 <script type="module">
