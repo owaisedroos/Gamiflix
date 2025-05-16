@@ -178,83 +178,73 @@
 </div>
 
 <script>
+  // Unique key for this game
   const gameKey = "gamiflix_rating_cyberpunk";
+
+  // DOM elements
   const pointer = document.getElementById('average-pointer');
   const circle = document.getElementById('my-score-circle');
 
-  function updateAveragePointer(average) {
-    pointer.style.left = `calc(${average}% - 1.5px)`;
-  }
-
-  function updateAverageScoreColor(score) {
-    if (score < 40) {
-      circle.style.backgroundColor = '#ff6666';
-    } else if (score < 70) {
-      circle.style.backgroundColor = '#ffcc66';
-    } else {
-      circle.style.backgroundColor = '#66cc66';
-    }
-  }
-
+  // Update UI
   function updateDisplay(average) {
-    circle.textContent = average.toFixed(1);
-    updateAveragePointer(average);
-    updateAverageScoreColor(average);
+    const clamped = Math.min(Math.max(average, 0), 100); // clamp 0–100
+    circle.textContent = clamped.toFixed(1);
+    pointer.style.left = `calc(${clamped}% - 1.5px)`;
+
+    // Color based on score
+    if (clamped < 40) {
+      circle.style.backgroundColor = '#ff6666'; // red
+    } else if (clamped < 70) {
+      circle.style.backgroundColor = '#ffcc66'; // yellow
+    } else {
+      circle.style.backgroundColor = '#66cc66'; // green
+    }
   }
 
-  function handleNewScore(score) {
-    // Parse previous data or set defaults
-    let stored = localStorage.getItem(gameKey);
-    let data = { total: 0, count: 0 };
-
-    try {
-      if (stored) {
-        const parsed = JSON.parse(stored);
-        if (typeof parsed.total === "number" && typeof parsed.count === "number") {
-          data = parsed;
-        }
-      }
-    } catch (e) {
-      // fallback to fresh start
-      console.warn("Corrupted localStorage, resetting score data.");
-    }
+  // Handle click
+  function handleScoreClick(score) {
+    let data = JSON.parse(localStorage.getItem(gameKey)) || { total: 0, count: 0 };
 
     data.total += score;
     data.count += 1;
-    const average = data.total / data.count;
 
-    // Save back to localStorage
+    const avg = data.total / data.count;
     localStorage.setItem(gameKey, JSON.stringify(data));
 
-    // Update UI
-    updateDisplay(average);
+    updateDisplay(avg);
   }
 
-  // Setup event listeners for bars
-  document.querySelectorAll('.bar').forEach(bar => {
-    bar.addEventListener('mouseover', function () {
-      circle.textContent = this.dataset.value;
-    });
-
-    bar.addEventListener('click', function () {
-      const value = parseInt(this.dataset.value);
-      if (!isNaN(value)) {
-        handleNewScore(value);
+  // Setup on DOM ready
+  window.addEventListener('DOMContentLoaded', () => {
+    // Load previous score
+    const stored = localStorage.getItem(gameKey);
+    if (stored) {
+      try {
+        const parsed = JSON.parse(stored);
+        if (parsed.total && parsed.count) {
+          const avg = parsed.total / parsed.count;
+          updateDisplay(avg);
+        }
+      } catch (e) {
+        console.warn('Invalid localStorage format.');
       }
-    });
-  });
-
-  // Load from localStorage on page load
-  window.addEventListener("DOMContentLoaded", () => {
-    try {
-      const stored = JSON.parse(localStorage.getItem(gameKey));
-      if (stored && typeof stored.total === "number" && typeof stored.count === "number" && stored.count > 0) {
-        const average = stored.total / stored.count;
-        updateDisplay(average);
-      }
-    } catch (e) {
-      console.warn("No valid stored rating found.");
     }
+
+    // Setup click & hover events
+    const bars = document.querySelectorAll('.bar');
+    bars.forEach(bar => {
+      const value = parseInt(bar.getAttribute('data-value'));
+
+      // Hover preview
+      bar.addEventListener('mouseover', () => {
+        circle.textContent = value;
+      });
+
+      // Click = rating
+      bar.addEventListener('click', () => {
+        handleScoreClick(value);
+      });
+    });
   });
 </script>
 
