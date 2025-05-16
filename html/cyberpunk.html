@@ -177,75 +177,47 @@
     <div id="reviewsDisplay"></div>
 </div>
 
-<script>
-  // Unique key for this game
-  const gameKey = "gamiflix_rating_cyberpunk";
+  <script>
+    let ratings = [];
+    let totalRating = 0;
 
-  // DOM elements
-  const pointer = document.getElementById('average-pointer');
-  const circle = document.getElementById('my-score-circle');
+    document.querySelectorAll('.bar').forEach(bar => {
+        bar.addEventListener('mouseover', function() {
+            const value = this.getAttribute('data-value');
+            document.getElementById('my-score-circle').textContent = value;
+        });
 
-  // Update UI
-  function updateDisplay(average) {
-    const clamped = Math.min(Math.max(average, 0), 100); // clamp 0–100
-    circle.textContent = clamped.toFixed(1);
-    pointer.style.left = `calc(${clamped}% - 1.5px)`;
-
-    // Color based on score
-    if (clamped < 40) {
-      circle.style.backgroundColor = '#ff6666'; // red
-    } else if (clamped < 70) {
-      circle.style.backgroundColor = '#ffcc66'; // yellow
-    } else {
-      circle.style.backgroundColor = '#66cc66'; // green
-    }
-  }
-
-  // Handle click
-  function handleScoreClick(score) {
-    let data = JSON.parse(localStorage.getItem(gameKey)) || { total: 0, count: 0 };
-
-    data.total += score;
-    data.count += 1;
-
-    const avg = data.total / data.count;
-    localStorage.setItem(gameKey, JSON.stringify(data));
-
-    updateDisplay(avg);
-  }
-
-  // Setup on DOM ready
-  window.addEventListener('DOMContentLoaded', () => {
-    // Load previous score
-    const stored = localStorage.getItem(gameKey);
-    if (stored) {
-      try {
-        const parsed = JSON.parse(stored);
-        if (parsed.total && parsed.count) {
-          const avg = parsed.total / parsed.count;
-          updateDisplay(avg);
-        }
-      } catch (e) {
-        console.warn('Invalid localStorage format.');
-      }
-    }
-
-    // Setup click & hover events
-    const bars = document.querySelectorAll('.bar');
-    bars.forEach(bar => {
-      const value = parseInt(bar.getAttribute('data-value'));
-
-      // Hover preview
-      bar.addEventListener('mouseover', () => {
-        circle.textContent = value;
-      });
-
-      // Click = rating
-      bar.addEventListener('click', () => {
-        handleScoreClick(value);
-      });
+        bar.addEventListener('click', function() {
+            const value = parseInt(this.getAttribute('data-value'));
+            ratings.push(value);
+            totalRating += value;
+            const averageRating = totalRating / ratings.length;
+            document.getElementById('my-score-circle').textContent = averageRating.toFixed(1);
+            updateAverageScoreColor(averageRating);
+            updateAveragePointer(averageRating);
+        });
     });
-  });
+
+    function updateAverageScoreColor(average) {
+        const circle = document.getElementById('my-score-circle');
+        if (average < 40) {
+            circle.style.backgroundColor = '#ff6666'; // Red for low ratings
+        } else if (average < 70) {
+            circle.style.backgroundColor = '#ffcc66'; // Yellow for mid ratings
+        } else {
+            circle.style.backgroundColor = '#66cc66'; // Green for high ratings
+        }
+    }
+
+    function updateAveragePointer(average) {
+        const pointer = document.getElementById('average-pointer');
+        const bars = document.querySelectorAll('.bar');
+        const barWidth = document.querySelector('.bar').offsetWidth;
+        const barCount = bars.length;
+
+        // Calculate the position of the pointer
+        pointer.style.left = `${(average / 100) * barWidth * barCount}px`;
+    } 
 </script>
 
 
