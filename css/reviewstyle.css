@@ -243,12 +243,11 @@ iframe {
         }
         .my-score .rating .average-pointer {
             position: absolute;
-            position: absolute;
             top: -20px; 
-            left: 0;
             width: 3px;
             height: 25px; 
             background-color: #fff; 
+            transition: left 0.3s ease;
         }
         
         .review-container {
