@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://kit.fontawesome.com/4931a0ff57.js" crossorigin="anonymous"></script>
+  <script type="module" src="firebase.js" defer></script>
+</head>
+<body>
+  <div class="container">
+    <div class="form-box">
+      <h1 id="title">Sign Up</h1>
+      <form>
+        <div id="signUpMessage" class="messageDiv" style="display: none;"></div>
+        <div class="input-group">
+          <div class="input-field" id="nameField">
+            <i class="fa-solid fa-user"></i>
+            <input type="text" placeholder="Name" id="name" required>
+          </div>
+
+          <div class="input-field">
+            <i class="fa-solid fa-envelope"></i>
+            <input type="email" placeholder="Email" id="email" required>
+          </div>
+
+          <div class="input-field">
+            <i class="fa-solid fa-lock"></i>
+            <input type="password" placeholder="Password" id="password" required>
+          </div>
+
+          <p>Lost password? <a href="#">Click Here!</a></p>
+        </div>
+
+        <div class="btn-field">
+          <button type="button" id="signupBtn">Sign Up</button>
+          <button type="button" id="signinBtn" class="disable">Sign In</button>
+        </div>
+        <div id="signInMessage" class="messageDiv" style="display: none;"></div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    const signupBtn = document.getElementById("signupBtn");
+    const signinBtn = document.getElementById("signinBtn");
+    const nameField = document.getElementById("nameField");
+    const title = document.getElementById("title");
+
+    signinBtn.onclick = function() {
+      nameField.style.maxHeight = "0"; // Hide name field for sign-in
+      title.innerHTML = "Sign In"; // Change title to Sign In
+      signupBtn.classList.add("disable");
+      signinBtn.classList.remove("disable");
+    };
+
+    signupBtn.onclick = function() {
+      nameField.style.maxHeight = "60px"; // Show name field for sign-up
+      title.innerHTML = "Sign Up"; // Change title to Sign Up
+      signupBtn.classList.remove("disable");
+      signinBtn.classList.add("disable");
+    };
+    // signupBtn.addEventListener('click', function(event) {
+    //   event.preventDefault();  
+
+    //   alert('Sign up successful! Welcome, ' + document.getElementById('name').value);
+    // });
+
+    // signinBtn.addEventListener('click', function(event) {
+    //   event.preventDefault(); 
+
+    //   alert('Sign in successful! Welcome back!');
+    // });
+  </script>
+</body>
+</html>
