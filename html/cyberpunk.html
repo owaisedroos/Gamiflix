@@ -177,7 +177,7 @@
     <div id="reviewsDisplay"></div>
 </div>
 
-  <script>
+    <script>
     let ratings = [];
     let totalRating = 0;
 
@@ -216,72 +216,92 @@
         const barCount = bars.length;
 
         // Calculate the position of the pointer
-        pointer.style.left = ${(average / 100) * barWidth * barCount}px;
+        pointer.style.left = `${(average / 100) * barWidth * barCount}px`;
     } 
 </script>
+ <!-- Firebase SDK -->
+ <script type="module">
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-app.js";
+    import { getFirestore, collection, addDoc, getDocs, query, orderBy, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-firestore.js";
 
+    // Your web app's Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyDHB8DiehcOo2a_j-zTKDrJX05KgsZ7x3U",
+      authDomain: "review-737a0.firebaseapp.com",
+      projectId: "review-737a0",
+      storageBucket: "review-737a0.appspot.com",
+      messagingSenderId: "1031987216501",
+      appId: "1:1031987216501:web:a8da9806108fb9b2fb783c",
+      measurementId: "G-ZR455TKWY6"
+    };
 
-<!-- Firebase -->
-<script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-app.js";
-  import { getFirestore, collection, addDoc, getDocs, query, orderBy, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-firestore.js";
+    // Initialize Firebase and Firestore
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
 
-  const firebaseConfig = {
-    apiKey: "AIzaSyDHB8DiehcOo2a_j-zTKDrJX05KgsZ7x3U",
-    authDomain: "review-737a0.firebaseapp.com",
-    projectId: "review-737a0",
-    storageBucket: "review-737a0.appspot.com",
-    messagingSenderId: "1031987216501",
-    appId: "1:1031987216501:web:a8da9806108fb9b2fb783c",
-    measurementId: "G-ZR455TKWY6"
-  };
+    // Function to display reviews from Firestore
+    async function displayReviews() {
+        const reviewsDisplay = document.getElementById('reviewsDisplay');
+        reviewsDisplay.innerHTML = ''; // Clear current reviews
 
-  const app = initializeApp(firebaseConfig);
-  const db = getFirestore(app);
-
-  async function displayReviews() {
-    const reviewsDisplay = document.getElementById('reviewsDisplay');
-    reviewsDisplay.innerHTML = '';
-    const reviewsQuery = query(collection(db, 'reviews'), orderBy('timestamp', 'desc'));
-    const querySnapshot = await getDocs(reviewsQuery);
-    querySnapshot.forEach((doc) => {
-      const r = doc.data();
-      const div = document.createElement('div');
-      div.classList.add('review-item');
-      div.innerHTML = <strong>${r.name}</strong><p>${r.review}</p><small>${new Date(r.timestamp?.toDate()).toLocaleString()}</small>;
-      reviewsDisplay.appendChild(div);
-    });
-  }
-
-  document.getElementById('add-review-button').addEventListener('click', (e) => {
-    e.preventDefault();
-    const form = document.getElementById('review-form');
-    form.style.display = (form.style.display === 'block') ? 'none' : 'block';
-  });
-
-  document.getElementById('submit-review').addEventListener('click', async () => {
-    const name = document.getElementById('reviewerName').value;
-    const review = document.getElementById('reviewText').value;
-    if (name && review) {
-      try {
-        await addDoc(collection(db, 'reviews'), {
-          name,
-          review,
-          timestamp: serverTimestamp()
+        // Get reviews from Firestore and display them
+        const reviewsQuery = query(collection(db, 'reviews'), orderBy('timestamp', 'desc'));
+        const querySnapshot = await getDocs(reviewsQuery);
+        
+        querySnapshot.forEach((doc) => {
+            const reviewData = doc.data();
+            const reviewElement = document.createElement('div');
+            reviewElement.classList.add('review-item');
+            reviewElement.innerHTML = `
+                <strong>${reviewData.name}</strong>
+                <p>${reviewData.review}</p>
+                <small>${new Date(reviewData.timestamp?.toDate()).toLocaleString()}</small>
+            `;
+            reviewsDisplay.appendChild(reviewElement);
         });
-        document.getElementById('reviewerName').value = '';
-        document.getElementById('reviewText').value = '';
-        displayReviews();
-        alert('Thank you for your review!');
-      } catch (err) {
-        console.error('Error:', err);
-      }
-    } else {
-      alert('Please fill in all fields.');
     }
-  });
 
-  window.onload = displayReviews;
+    // Show/hide the review form when "Add My Review" is clicked
+    document.getElementById('add-review-button').addEventListener('click', function(event) {
+        event.preventDefault(); 
+        const form = document.getElementById('review-form');
+
+        if (form.style.display === 'none' || form.style.display === '') {
+            form.style.display = 'block';
+        } else {
+            form.style.display = 'none';
+        }
+    });
+
+    // Handle form submission to Firestore
+    document.getElementById('submit-review').addEventListener('click', async function() {
+        const name = document.getElementById('reviewerName').value;
+        const review = document.getElementById('reviewText').value;
+
+        if (name && review) {
+            // Add review to Firebase Firestore
+            try {
+                await addDoc(collection(db, 'reviews'), {
+                    name: name,
+                    review: review,
+                    timestamp: serverTimestamp()
+                });
+                console.log('Review added');
+                document.getElementById('reviewerName').value = '';
+                document.getElementById('reviewText').value = '';
+                displayReviews(); // Refresh the reviews
+                alert('Thank you for your review!');
+            } catch (error) {
+                console.error('Error adding review: ', error);
+            }
+        } else {
+            alert('Please fill out both fields.');
+        }
+    });
+
+    // Display reviews when the page loads
+    window.onload = displayReviews;
 </script>
 </body>
 </html>
