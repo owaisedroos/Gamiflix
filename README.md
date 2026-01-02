@@ -9,7 +9,7 @@
 ---
 
 ##  Overview
-Gamiflix is a dynamic and interactive **game review website** designed to provide gamers with a trusted platform to explore, review, and rate video games across multiple genres. The platform emphasizes **community-driven reviews**, **real-time updates**, and a **clean user interface**, making it easy for users to discover and evaluate games.
+Gamiflix is a dynamic and interactive game review website designed to provide gamers with a trusted platform to explore, review, and rate video games across multiple genres. The platform emphasizes community-driven reviews, real-time updates, and a clean user interface, making it easy for users to discover and evaluate games.
 
 ---
 
@@ -19,7 +19,7 @@ The gaming community often struggles with:
 - Cluttered and overwhelming review platforms  
 - Limited user interaction and transparency  
 
-Gamiflix addresses these challenges by offering a **centralized, user-friendly, and unbiased** platform where gamers can share genuine reviews and make informed decisions.
+Gamiflix addresses these challenges by offering a centralized, user-friendly, and unbiased platform where gamers can share genuine reviews and make informed decisions.
 
 ---
 
