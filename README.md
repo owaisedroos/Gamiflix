@@ -94,7 +94,7 @@ This ensures scalability, performance, and maintainability.
 
 | Home Page |
 |----------|
-| <img src="img/home.jpg" width="300"/> |
+| <img src="img/home.jpg" width="600"/> |
 | **Home Page** – Displays featured games, scores, and quick navigation |
 
 </details>
