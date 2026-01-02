@@ -1,4 +1,4 @@
-# 🎮 Gamiflix  gamiflix.netlify.app
+# 🎮 Gamiflix  
 *A Community-Driven Game Review Website*
 
 ![HTML5](https://img.shields.io/badge/HTML5-Structure-E34F26?logo=html5&logoColor=white)
@@ -153,7 +153,11 @@ This ensures scalability, performance, and maintainability.
 </details>
 
 ---
+## Website Link
 
+gamiflix.netlify.app
+
+---
 
 ##  Future Enhancements
 - AI-based game recommendations  
