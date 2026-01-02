@@ -94,7 +94,7 @@ This ensures scalability, performance, and maintainability.
 
 | Home Page |
 |----------|
-| <img src="img/home.jpg" width="600"/> |
+| <img src="img/home.jpg" width="800"/> |
 | **Home Page** – Displays featured games, scores, and quick navigation |
 
 </details>
@@ -108,7 +108,7 @@ This ensures scalability, performance, and maintainability.
 
 | Game Details |
 |-------------|
-| <img src="img/game_details.jpg" width="300"/> |
+| <img src="img/game_details.jpg" width="800"/> |
 | **Game Details Page** – Description, trailer, platform info, and expert review |
 
 </details>
@@ -122,7 +122,7 @@ This ensures scalability, performance, and maintainability.
 
 | Ratings |
 |------------------|
-| <img src="img/ratings.jpg" width="300"/> |
+| <img src="img/ratings.jpg" width="800"/> |
 | **Ratings Section** – Likes, dislikes, Gamilfix Score based on various parametrs |
 
 </details>
@@ -130,7 +130,7 @@ This ensures scalability, performance, and maintainability.
 ---
 | Reviews  |
 |------------------|
-| <img src="img/reviews.jpg" width="300"/> |
+| <img src="img/reviews.jpg" width="800"/> |
 | **Ratings Section** – user comments, and dynamic user scoring |
 
 </details>
@@ -142,7 +142,7 @@ This ensures scalability, performance, and maintainability.
 
 | Login / Register |
 |-----------------|
-| <img src="screenshots/auth.jpg" width="300"/> |
+| <img src="screenshots/auth.jpg" width="800"/> |
 | **Authentication** – Secure sign-in and sign-up using Firebase |
 
 </details>
