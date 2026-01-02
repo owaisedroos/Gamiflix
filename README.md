@@ -128,21 +128,25 @@ This ensures scalability, performance, and maintainability.
 
 ---
 <details>
+  <summary><strong> Reviews</strong></summary>
+
+<br>
+
 | Reviews  |
 |------------------|
 | <img src="img/reviews.jpg" width="800"/> |
 | **Ratings Section** – user comments, and dynamic user scoring |
 
 </details>
-
+---
 <details>
 <summary><strong> User Authentication</strong></summary>
 
 <br>
-<detaisl>
+
 | Login / Register |
 |-----------------|
-| <img src="screenshots/auth.jpg" width="800"/> |
+| <img src="img/auth.jpg" width="800"/> |
 | **Authentication** – Secure sign-in and sign-up using Firebase |
 
 </details>
