@@ -83,8 +83,7 @@ This ensures scalability, performance, and maintainability.
 
 ##  Screenshots
 
-  <Click on any section below to view screenshots.>
----
+  Click on any section below to view screenshots.
 
 <details>
 <summary><strong> Home Page</strong></summary>
