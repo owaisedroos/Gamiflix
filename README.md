@@ -83,8 +83,7 @@ This ensures scalability, performance, and maintainability.
 
 ##  Screenshots
 
-> Click on any section below to view screenshots.
-
+ Click on any section below to view screenshots.
 ---
 
 <details>
@@ -128,6 +127,7 @@ This ensures scalability, performance, and maintainability.
 </details>
 
 ---
+<details>
 | Reviews  |
 |------------------|
 | <img src="img/reviews.jpg" width="800"/> |
@@ -139,7 +139,7 @@ This ensures scalability, performance, and maintainability.
 <summary><strong> User Authentication</strong></summary>
 
 <br>
-
+<detaisl>
 | Login / Register |
 |-----------------|
 | <img src="screenshots/auth.jpg" width="800"/> |
