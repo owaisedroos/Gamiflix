@@ -153,9 +153,9 @@ This ensures scalability, performance, and maintainability.
 </details>
 
 ---
-## Website Link
+## 🌐 Live Demo
 
-gamiflix.netlify.app
+🚀 **View Live Website:** [Gamiflix](https://gamiflix.netlify.app)
 
 ---
 
