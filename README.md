@@ -138,7 +138,9 @@ This ensures scalability, performance, and maintainability.
 | **Ratings Section** – user comments, and dynamic user scoring |
 
 </details>
+
 ---
+
 <details>
 <summary><strong> User Authentication</strong></summary>
 
