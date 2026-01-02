@@ -81,12 +81,71 @@ This ensures scalability, performance, and maintainability.
 
 ---
 
-## 📱 Screenshots
-| Home Page | Game Details | Reviews & Ratings |
-|----------|-------------|------------------|
-| ![Home](screenshots/home.png) | ![Game Details](screenshots/game_details.png) | ![Reviews](screenshots/reviews.png) |
+##  Screenshots
 
-> Replace the image names with your actual screenshot filenames.
+> Click on any section below to view screenshots.
+
+---
+
+<details>
+<summary><strong> Home Page</strong></summary>
+
+<br>
+
+| Home Page |
+|----------|
+| <img src="img/home.jpg" width="300"/> |
+| **Home Page** – Displays featured games, scores, and quick navigation |
+
+</details>
+
+---
+
+<details>
+<summary><strong> Game Details</strong></summary>
+
+<br>
+
+| Game Details |
+|-------------|
+| <img src="img/game_details.jpeg" width="300"/> |
+| **Game Details Page** – Description, trailer, platform info, and expert review |
+
+</details>
+
+---
+
+<details>
+<summary><strong> Ratings</strong></summary>
+
+<br>
+
+| Ratings |
+|------------------|
+| <img src="img/ratings.jpeg" width="300"/> |
+| **Ratings Section** – Likes, dislikes, Gamilfix Score based on various parametrs |
+
+</details>
+
+---
+| Reviews  |
+|------------------|
+| <img src="img/reviews.jpeg" width="300"/> |
+| **Ratings Section** – user comments, and dynamic user scoring |
+
+</details>
+
+<details>
+<summary><strong> User Authentication</strong></summary>
+
+<br>
+
+| Login / Register |
+|-----------------|
+| <img src="screenshots/auth.jpeg" width="300"/> |
+| **Authentication** – Secure sign-in and sign-up using Firebase |
+
+</details>
 
 ---
 
