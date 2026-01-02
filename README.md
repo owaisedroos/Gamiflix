@@ -108,7 +108,7 @@ This ensures scalability, performance, and maintainability.
 
 | Game Details |
 |-------------|
-| <img src="img/game_details.jpeg" width="300"/> |
+| <img src="img/game_details.jpg" width="300"/> |
 | **Game Details Page** – Description, trailer, platform info, and expert review |
 
 </details>
@@ -122,7 +122,7 @@ This ensures scalability, performance, and maintainability.
 
 | Ratings |
 |------------------|
-| <img src="img/ratings.jpeg" width="300"/> |
+| <img src="img/ratings.jpg" width="300"/> |
 | **Ratings Section** – Likes, dislikes, Gamilfix Score based on various parametrs |
 
 </details>
@@ -130,7 +130,7 @@ This ensures scalability, performance, and maintainability.
 ---
 | Reviews  |
 |------------------|
-| <img src="img/reviews.jpeg" width="300"/> |
+| <img src="img/reviews.jpg" width="300"/> |
 | **Ratings Section** – user comments, and dynamic user scoring |
 
 </details>
@@ -142,7 +142,7 @@ This ensures scalability, performance, and maintainability.
 
 | Login / Register |
 |-----------------|
-| <img src="screenshots/auth.jpeg" width="300"/> |
+| <img src="screenshots/auth.jpg" width="300"/> |
 | **Authentication** – Secure sign-in and sign-up using Firebase |
 
 </details>
